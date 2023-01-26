@@ -1,0 +1,185 @@
+﻿<Window x:Class="Calculator.View.Calculator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:Calculator.Common"
+        Title="Calculator" Height="349" Width="228"
+        ResizeMode="CanMinimize" Icon="/Calculator;component/Resources/calculator.ico">
+    <Window.Resources>
+        <conv:VisibilityConverter x:Key="VisibilityConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+        </Grid.Background>
+
+        <Grid x:Name="Field"
+            Margin="10,10,10,0" Height="80" Background="White"
+            VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17*"/>
+                <RowDefinition Height="23*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="13*"/>
+                <ColumnDefinition Width="88*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <Border BorderBrush="DarkGray" BorderThickness="1"/>
+            </Border>
+
+            <Label x:Name="ExpressionField" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+                     Margin="0,0,0,0" BorderBrush="Transparent"
+                     VerticalAlignment="Stretch"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Right" Content="{Binding ExpressionField, Mode=OneWay}"/>
+
+            <Label x:Name="BufferField" Grid.Column="1" Grid.Row="1"
+                     HorizontalAlignment="Stretch"
+                     Margin="0,0,0,0" BorderBrush="Transparent"
+                     VerticalAlignment="Stretch"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Right"
+                     FontSize="24" FontFamily="Segoe UI Light" Content="{Binding BufferField, Mode=OneWay}"
+                   />
+
+            <Label Grid.Column="0" Grid.Row="1" Content="M" FontSize="17"
+                   Visibility="{Binding MemoryVisibility, Converter={StaticResource VisibilityConverter}}"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Top"
+                   VerticalAlignment="Top" HorizontalAlignment="Stretch" 
+                   Height="28"/>
+
+            <Label Grid.Column="0" Grid.Row="1" Content="E" FontSize="17" 
+                   Visibility="{Binding ErrorVisibility, Converter={StaticResource VisibilityConverter}}"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
+                   Height="30"/>
+
+            <!--
+            <TextBox Grid.Column="0" Grid.ColumnSpan="2"
+                     IsReadOnly="True"
+                     HorizontalAlignment="Stretch"
+                     Margin="0,0,0,0" BorderBrush="Transparent"
+                     TextWrapping="Wrap" Text="TextBox"
+                     VerticalAlignment="Stretch"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Right"/>
+            <TextBox Grid.Column="1" Grid.Row="1"
+                     IsReadOnly="True"
+                     HorizontalAlignment="Stretch"
+                     Margin="0,0,0,0" BorderBrush="Transparent"
+                     TextWrapping="Wrap" Text="TextBox"
+                     VerticalAlignment="Stretch"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Right"
+                     FontSize="24" FontFamily="Segoe UI Light" />-->
+        </Grid>
+
+        <Grid x:Name="Buttons"
+              Margin="10,100,10,10"
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnMemoryClear" Grid.Row="0" Grid.Column="0" Style="{StaticResource myBtn}" Content="MC"
+                    Command="{Binding MemoryClearCommand}"
+                    />
+            <Button x:Name="btnMemoryRead" Grid.Row="0" Grid.Column="1" Style="{StaticResource myBtn}" Content="MR"
+                    Command="{Binding MemoryReadCommand}"
+                    />
+            <Button x:Name="btnMemorySave" Grid.Row="0" Grid.Column="2" Style="{StaticResource myBtn}" Content="MS"
+                    Command="{Binding MemorySaveCommand}"
+                    />
+            <Button x:Name="btnMemoryAdd" Grid.Row="0" Grid.Column="3" Style="{StaticResource myBtn}" Content="M+"
+                    Command="{Binding MemoryAddCommand}"
+                    />
+            <Button x:Name="btnMemorySub" Grid.Row="0" Grid.Column="4" Style="{StaticResource myBtn}" Content="M-"
+                    Command="{Binding MemorySubCommand}"
+                    />
+            <Button x:Name="btnBackspace" Grid.Row="1" Grid.Column="0" Style="{StaticResource myBtn}" Content="&#8592;"
+                    Command="{Binding BackspaceCommand}"
+                    />
+            <Button x:Name="btnClearBuffer" Grid.Row="1" Grid.Column="1" Style="{StaticResource myBtn}" Content="CE"
+                    Command="{Binding ClearBufferCommand}"
+                    />
+            <Button x:Name="btnClearExpression" Grid.Row="1" Grid.Column="2" Style="{StaticResource myBtn}" Content="C"
+                    Command="{Binding ClearExpressionCommand}"
+                    />
+            <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource myBtn}" Content="("
+                    Command="{Binding OperatorCommand}" CommandParameter="Open"
+                    />
+            <Button Grid.Row="1" Grid.Column="4" Style="{StaticResource myBtn}" Content=")"
+                    Command="{Binding OperatorCommand}" CommandParameter="Close"
+                    />
+            <Button x:Name="btnSeven" Grid.Row="2" Grid.Column="0" Style="{StaticResource myBtn}" Content="7"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnSeven}"
+                    />
+            <Button x:Name="btnEight" Grid.Row="2" Grid.Column="1" Style="{StaticResource myBtn}" Content="8"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnEight}"
+                    />
+            <Button x:Name="btnNine" Grid.Row="2" Grid.Column="2" Style="{StaticResource myBtn}" Content="9"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnNine}"
+                    />
+            <Button Grid.Row="2" Grid.Column="3" Style="{StaticResource myBtn}" Content="*"
+                    Command="{Binding OperatorCommand}" CommandParameter="Mul"
+                    />
+            <Button Grid.Row="2" Grid.Column="4" Style="{StaticResource myBtn}" Content="/"
+                    Command="{Binding OperatorCommand}" CommandParameter="Div"
+                    />
+            <Button x:Name="btnFour" Grid.Row="3" Grid.Column="0" Style="{StaticResource myBtn}" Content="4"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnFour}"
+                    />
+            <Button x:Name="btnFive" Grid.Row="3" Grid.Column="1" Style="{StaticResource myBtn}" Content="5"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnFive}"
+                    />
+            <Button x:Name="btnSix" Grid.Row="3" Grid.Column="2" Style="{StaticResource myBtn}" Content="6"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnSix}"
+                    />
+            <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource myBtn}" Content="-"
+                    Command="{Binding OperatorCommand}" CommandParameter="Sub"
+                    />
+            <Button Grid.Row="3" Grid.Column="4" Style="{StaticResource myBtn}" Content="n&#7504;"
+                    Command="{Binding OperatorCommand}" CommandParameter="Degree"
+                    />
+            <Button x:Name="btnOne" Grid.Row="4" Grid.Column="0" Style="{StaticResource myBtn}" Content="1"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnOne}"
+                    />
+            <Button x:Name="btnTwo" Grid.Row="4" Grid.Column="1" Style="{StaticResource myBtn}" Content="2"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnTwo}"
+                    />
+            <Button x:Name="btnThree" Grid.Row="4" Grid.Column="2" Style="{StaticResource myBtn}" Content="3"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnThree}"
+                    />
+            <Button Grid.Row="4" Grid.Column="3" Style="{StaticResource myBtn}" Content="+"
+                    Command="{Binding OperatorCommand}" CommandParameter="Add"
+                    />
+            <Button Grid.Row="4" Grid.Column="4" Grid.RowSpan="2" Style="{StaticResource myBtn}" Content="="
+                    Command="{Binding ResultCommand}"
+                    />
+            <Button x:Name="btnZero" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource myBtn}" Content="0"
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnZero}"
+                    />
+            <Button x:Name="btnComa" Grid.Row="5" Grid.Column="2" Style="{StaticResource myBtn}" Content=","
+                    Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnComa}"
+                    />
+            <Button Grid.Row="5" Grid.Column="3" Style="{StaticResource myBtn}" Content="&#177;"
+                    Command="{Binding ChangeSignCommand}"
+                    />
+
+
+        </Grid>
+    </Grid>
+</Window>

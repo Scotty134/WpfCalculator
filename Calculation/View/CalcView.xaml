@@ -1,0 +1,34 @@
+﻿<Controls:MetroWindow x:Class="Calculation.View.CalcView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="Calculator" Height="287.843" Width="175.327" ResizeMode="NoResize"
+        Background="LightBlue">
+    <Grid Margin="0,0,4,0">
+        <TextBox Margin="5,10,5,0" TextWrapping="Wrap" Height="40" Name="Data" 
+                 Text="{Binding DataField, Mode=OneWay}" TextAlignment="Right" VerticalAlignment="Top"
+                 IsReadOnly="True" FontFamily="GulimChe" FontSize="18" TextChanged="TextBox_TextChanged"/>
+
+        <Button Name="btnOne" Content="1" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnOne}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,125,45" VerticalAlignment="Bottom"/>
+        <Button Name="btnTwo" Content="2" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnTwo}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,85,45" VerticalAlignment="Bottom"/>
+        <Button Name="btnThree" Content="3" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnThree}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,45,45" VerticalAlignment="Bottom"/>
+        <Button Name="btnFour" Content="4" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnFour}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,125,85" VerticalAlignment="Bottom"/>
+        <Button Name="btnFive" Content="5" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnFive}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,85,85" VerticalAlignment="Bottom"/>
+        <Button Name="btnSix" Content="6" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnSix}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,45,85" VerticalAlignment="Bottom"/>
+        <Button Name="btnSeven" Content="7" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnSeven}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,125,125" VerticalAlignment="Bottom"/>
+        <Button Name="btnEight" Content="8" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnEight}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,85,125" VerticalAlignment="Bottom"/>
+        <Button Name="btnNine" Content="9" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnNine}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,45,125" VerticalAlignment="Bottom"/>
+        <Button Name="btnPoint" Content="." Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnPoint}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,125,5" VerticalAlignment="Bottom"/>
+        <Button Name="btnZero" Content="0" Command="{Binding CountCommand}" CommandParameter="{Binding ElementName=btnZero}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,85,5" VerticalAlignment="Bottom"/>
+        <Button Content="+/-" Command="{Binding ChangeCommand}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,45,5" VerticalAlignment="Bottom"/>
+
+        <Button Name="btnDiv" Content="/" Command="{Binding SignCommand}" CommandParameter="{Binding ElementName=btnDiv}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,45,165" VerticalAlignment="Bottom"/>
+        <Button Name="btnMul" Content="*" Command="{Binding SignCommand}" CommandParameter="{Binding ElementName=btnMul}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,5,165" VerticalAlignment="Bottom"/>
+        <Button Name="btnPlus" Content="+" Command="{Binding SignCommand}" CommandParameter="{Binding ElementName=btnPlus}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,5,45" VerticalAlignment="Bottom" Height="75"/>
+        <Button Name="btnMinus" Content="-" Command="{Binding SignCommand}" CommandParameter="{Binding ElementName=btnMinus}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,5,125" VerticalAlignment="Bottom"/>
+        <Button Name="btnResult" Content="=" Command="{Binding SignCommand}" CommandParameter="{Binding ElementName=btnResult}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,5,5" VerticalAlignment="Bottom"/>
+
+        <Button Name="btnClear" Content="C" Command="{Binding ClearCommand}" Style="{StaticResource myBtn}" HorizontalAlignment="Right" Margin="0,0,85,165" VerticalAlignment="Bottom" Width="75"/>
+
+    </Grid>
+</Controls:MetroWindow>
